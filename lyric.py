@@ -1,11 +1,11 @@
-import discord
+import discord                                             # Discord.py documentation : https://discordpy.readthedocs.io/
 from discord.ext import commands,tasks
 import os
-import yt_dlp as yt
+import yt_dlp as yt                                        # yt-dlp git : https://github.com/yt-dlp/yt-dlp
 import asyncio
 
 
-discord_token = 'Discord API Key'
+discord_token = 'Discord API Key'                          # Insert your Discord API key here
 
 intents = discord.Intents().all()
 client = discord.Client(intents=intents)
@@ -23,7 +23,7 @@ ytdl_format_options = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0'            # bind to ipv4 since ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0'                             # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
 ffmpeg_options = {
@@ -50,7 +50,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         return filename
 
 
-@bot.command(name='join', help='"!lyric join" to join the voice channel')
+@bot.command(name='join', help='"!lyric join" to join the voice channel')                     # join command
 async def join(ctx):
     if not ctx.message.author.voice:
         await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
@@ -60,7 +60,7 @@ async def join(ctx):
     await channel.connect()
 
 
-@bot.command(name='leave', help='"!lyric leave" to leave the voice channel')
+@bot.command(name='leave', help='"!lyric leave" to leave the voice channel')                   # leave command
 async def leave(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_connected():
@@ -71,7 +71,7 @@ async def leave(ctx):
         await ctx.send('Uh oh! It seems something is wrong. Use "!lyric help" for command help.')
 
 
-@bot.command(name='play', help='"!lyric play (Youtube URL)" to play music from a youtube video')
+@bot.command(name='play', help='"!lyric play (Youtube URL)" to play music from a youtube video')             # play command
 async def play(ctx, url):
     try:
         server = ctx.message.guild
@@ -85,7 +85,7 @@ async def play(ctx, url):
         await ctx.send('Uh oh! It seems something is wrong. Use "!lyric help" for command help.')
 
 
-@bot.command(name='pause', help='"!lyric pause" to pause the music')
+@bot.command(name='pause', help='"!lyric pause" to pause the music')                            # pause command
 async def pause(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
@@ -94,7 +94,7 @@ async def pause(ctx):
         await ctx.send('It seems no music is playing right now. Use "!lyric help" for command help.')
 
 
-@bot.command(name='resume', help='"!lyric resume" to resume the paused music')
+@bot.command(name='resume', help='"!lyric resume" to resume the paused music')                  # resume command
 async def resume(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_paused():
@@ -103,7 +103,7 @@ async def resume(ctx):
         await ctx.send('It seems no music is playing right now. Use "!lyric help" for command help.')
 
 
-@bot.command(name='stop', help='"!lyric stop" to stop playing music')
+@bot.command(name='stop', help='"!lyric stop" to stop playing music')                           # stop command
 async def stop(ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
