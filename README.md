@@ -1,6 +1,6 @@
 # Lyric
 
-Lyric is a simple discord music bot made in python using yt-dlp and discord.py APIs
+Lyric is a simple discord music bot made in python using yt-dlp and discord.py API
 You can use it play music from Youtube videos.
 
 NOTE: As the bot uses yt-dlp, the .webm files are first downloaded and then streamed into voice. The bot deletes every .webm file in its directory when the leave command is executed. 
